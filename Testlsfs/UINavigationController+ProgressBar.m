@@ -19,6 +19,12 @@
 
 @implementation UINavigationController (ProgressBar)
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self createProgressBar];
+}
+
+
 #pragma mark - private methords
 
 - (void)showProgress:(CGFloat)progress {
@@ -31,8 +37,9 @@
     } else {
         self.barColor = [UIColor colorWithRed:65.0/255.0 green:105.0/255.0 blue:225.0/255.0 alpha:1];
     }
-    [self createProgressBar];
-
+    if (self.gradientLayer.colors.count == 0) {
+        self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
+    }
     CGRect frame = CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, CGRectGetWidth(self.navigationBar.frame)*progress, self.lineWidth);
     self.progressView.frame = frame;
     self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);
@@ -54,11 +61,11 @@
     if (!self.progressView) {
         self.lineWidth = 5.0;
         self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, 0, self.lineWidth)];
-//        self.progressView.backgroundColor = self.barColor;
+        //        self.progressView.backgroundColor = self.barColor;
         [self.navigationBar addSubview:self.progressView];
         self.gradientLayer = [CAGradientLayer layer];
         self.gradientLayer.locations = @[@0.5];
-        self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
+        //        self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
         self.gradientLayer.startPoint = CGPointMake(1.0, 0);
         self.gradientLayer.endPoint = CGPointMake(0, 0);
         self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);
@@ -99,7 +106,7 @@
 }
 
 - (CAGradientLayer *)gradientLayer {
-   return objc_getAssociatedObject(self, @selector(setGradientLayer:));
+    return objc_getAssociatedObject(self, @selector(setGradientLayer:));
 }
 
 
