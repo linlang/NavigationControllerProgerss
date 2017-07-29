@@ -11,7 +11,7 @@
 
 @interface UINavigationController ()
 
-@property (assign, nonatomic) CGFloat lineWidth;
+@property (assign, nonatomic) CGFloat lineWidth;//进度条的宽度
 @property (strong, nonatomic) UIView *progressView;
 @property (strong, nonatomic) CAGradientLayer *gradientLayer;
 
@@ -52,8 +52,11 @@
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.progressView.frame = CGRectMake(CGRectGetWidth(self.navigationBar.frame),CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, CGRectGetWidth(self.navigationBar.frame), self.lineWidth);
     } completion:^(BOOL finished) {
-        [self.progressView removeFromSuperview];
-        self.progressView = nil;
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        self.progressView.frame = CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, 0, self.lineWidth);
+        self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);
+        [CATransaction commit];
     }];
 }
 
@@ -61,11 +64,9 @@
     if (!self.progressView) {
         self.lineWidth = 5.0;
         self.progressView = [[UIView alloc] initWithFrame:CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, 0, self.lineWidth)];
-        //        self.progressView.backgroundColor = self.barColor;
         [self.navigationBar addSubview:self.progressView];
         self.gradientLayer = [CAGradientLayer layer];
         self.gradientLayer.locations = @[@0.5];
-        //        self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
         self.gradientLayer.startPoint = CGPointMake(1.0, 0);
         self.gradientLayer.endPoint = CGPointMake(0, 0);
         self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);

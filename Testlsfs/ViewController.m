@@ -8,11 +8,14 @@
 
 #import "ViewController.h"
 #import "UINavigationController+ProgressBar.h"
+#import "ImageHelper.h"
+
 
 @interface ViewController ()
 
 @property (assign, nonatomic) float progress;
 @property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) UIButton *downloadBtn;
 
 @end
 
@@ -20,42 +23,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(30, 80, 80, 45)];
-    btn.layer.borderColor = [UIColor blueColor].CGColor;
-    btn.layer.borderWidth = 1;
-    btn.layer.masksToBounds = YES;
-    btn.layer.cornerRadius = 5;
-    [btn setTitle:@"动画" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+    self.downloadBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width-120)/2.0, [UIScreen mainScreen].bounds.size.height - 150, 120, 50);
+    [self.view addSubview:self.downloadBtn];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - event response
 
 - (void)btnAction:(UIButton *)sender {
     //开始动画
-   self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
 
 - (void)timerAction:(NSTimer *)timer {
-
     self.progress +=0.1;
     [self.navigationController showProgress:self.progress withBarColor:nil];
     if (self.progress >= 1) {
         [self.timer invalidate];
         self.timer = nil;
         self.progress = 0;
-//        [self.navigationController hiddenProgeree];
         return;
     }
 }
 
+#pragma mark - set and get
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (UIButton *)downloadBtn {
+    if (_downloadBtn == nil) {
+        _downloadBtn = [[UIButton alloc] init];
+        _downloadBtn.layer.cornerRadius = 5;
+        _downloadBtn.layer.masksToBounds = YES;
+        [_downloadBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        [_downloadBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+        [_downloadBtn setTitle:@"下载" forState:UIControlStateNormal];
+        [_downloadBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _downloadBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [_downloadBtn setBackgroundImage:[ImageHelper drawImageWithColor:[UIColor colorWithRed:255.0/255.0 green:215.0/255.0 blue:0 alpha:1]] forState:UIControlStateNormal];
+        [_downloadBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _downloadBtn;
 }
+
 
 
 @end

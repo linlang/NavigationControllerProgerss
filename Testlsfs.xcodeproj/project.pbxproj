@@ -16,6 +16,7 @@
 		89433C1E1F147315008D1B34 /* TestlsfsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89433C1D1F147315008D1B34 /* TestlsfsTests.m */; };
 		89433C291F147315008D1B34 /* TestlsfsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89433C281F147315008D1B34 /* TestlsfsUITests.m */; };
 		89433C381F14739E008D1B34 /* UINavigationController+ProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 89433C371F14739E008D1B34 /* UINavigationController+ProgressBar.m */; };
+		89D8AF801F2C7759003310B2 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 89D8AF7F1F2C7759003310B2 /* ImageHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		89433C2A1F147315008D1B34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89433C361F14739E008D1B34 /* UINavigationController+ProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ProgressBar.h"; sourceTree = "<group>"; };
 		89433C371F14739E008D1B34 /* UINavigationController+ProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ProgressBar.m"; sourceTree = "<group>"; };
+		89D8AF7E1F2C7759003310B2 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
+		89D8AF7F1F2C7759003310B2 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,7 @@
 		89433C021F147315008D1B34 /* Testlsfs */ = {
 			isa = PBXGroup;
 			children = (
+				89D8AF7D1F2C7759003310B2 /* Handler */,
 				89433C361F14739E008D1B34 /* UINavigationController+ProgressBar.h */,
 				89433C371F14739E008D1B34 /* UINavigationController+ProgressBar.m */,
 				89433C061F147315008D1B34 /* AppDelegate.h */,
@@ -143,6 +147,15 @@
 				89433C2A1F147315008D1B34 /* Info.plist */,
 			);
 			path = TestlsfsUITests;
+			sourceTree = "<group>";
+		};
+		89D8AF7D1F2C7759003310B2 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				89D8AF7E1F2C7759003310B2 /* ImageHelper.h */,
+				89D8AF7F1F2C7759003310B2 /* ImageHelper.m */,
+			);
+			path = Handler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +295,7 @@
 				89433C081F147315008D1B34 /* AppDelegate.m in Sources */,
 				89433C381F14739E008D1B34 /* UINavigationController+ProgressBar.m in Sources */,
 				89433C051F147315008D1B34 /* main.m in Sources */,
+				89D8AF801F2C7759003310B2 /* ImageHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +529,7 @@
 				89433C2F1F147315008D1B34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89433C301F147315008D1B34 /* Build configuration list for PBXNativeTarget "TestlsfsTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +538,7 @@
 				89433C321F147315008D1B34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89433C331F147315008D1B34 /* Build configuration list for PBXNativeTarget "TestlsfsUITests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +547,7 @@
 				89433C351F147315008D1B34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
