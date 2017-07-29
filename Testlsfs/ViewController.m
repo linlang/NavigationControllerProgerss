@@ -36,6 +36,7 @@
 
 - (void)btnAction:(UIButton *)sender {
     //开始动画
+    sender.userInteractionEnabled = NO;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
 }
 
@@ -46,6 +47,7 @@
         [self.timer invalidate];
         self.timer = nil;
         self.progress = 0;
+        self.downloadBtn.userInteractionEnabled = YES;
         return;
     }
 }
