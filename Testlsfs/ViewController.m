@@ -41,7 +41,7 @@
 }
 
 - (void)timerAction:(NSTimer *)timer {
-    self.progress +=0.1;
+    self.progress +=0.3;
     [self.navigationController showProgress:self.progress withBarColor:nil];
     if (self.progress >= 1) {
         [self.timer invalidate];

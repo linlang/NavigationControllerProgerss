@@ -19,12 +19,6 @@
 
 @implementation UINavigationController (ProgressBar)
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self createProgressBar];
-}
-
-
 #pragma mark - private methords
 
 - (void)showProgress:(CGFloat)progress {
@@ -37,15 +31,24 @@
     } else {
         self.barColor = [UIColor colorWithRed:65.0/255.0 green:105.0/255.0 blue:225.0/255.0 alpha:1];
     }
-    if (self.gradientLayer.colors.count == 0) {
-        self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
-    }
-    CGRect frame = CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, CGRectGetWidth(self.navigationBar.frame)*progress, self.lineWidth);
-    self.progressView.frame = frame;
-    self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);
+    //这边这样处理 是为了让设置第一次进度有隐式动画
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self createProgressBar];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.gradientLayer.colors.count == 0) {
+                self.gradientLayer.colors =  @[(__bridge id)self.barColor.CGColor, (__bridge id)[UIColor whiteColor].CGColor];
+            }
+            CGRect frame = CGRectMake(0,CGRectGetHeight(self.navigationBar.frame)-self.lineWidth, CGRectGetWidth(self.navigationBar.frame)*progress, self.lineWidth);
+            self.progressView.frame = frame;
+            self.gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.progressView.frame), self.lineWidth);
+        });
+    });
+    
+
     if (progress >= 1) {
         [self performSelector:@selector(hiddenProgeree) withObject:nil afterDelay:0.6];
     }
+
 }
 
 - (void)hiddenProgeree {
